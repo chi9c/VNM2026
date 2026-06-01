@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<link rel="apple-touch-icon" sizes="180x180" href="Chiby2026icon1.png">
+<title>越南河內・下龍灣 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8A96E;
+    --gold-light: #E8D5B0;
+    --gold-pale: #F7F0E3;
+    --ink: #1C1814;
+    --ink2: #3D342A;
+    --cream: #FAF7F2;
+    --sage: #5A7A5C;
+    --terracotta: #C4593A;
+    --mist: #7A8FA0;
+    --card-bg: #FFFFFF;
+    --border: #EAE3D8;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 80px;
+  }
+  .serif { font-family: 'Cormorant Garamond', serif; }
+
+  /* Hero */
+  .hero {
+    background: var(--ink);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(200,169,110,0.06) 12px, rgba(200,169,110,0.06) 13px);
+  }
+  .hero-tag { font-size: 10px; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; margin-bottom: .4rem; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; color: #FAF7F2; line-height: 1.05; }
+  .hero-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--gold); margin-top: .25rem; }
+  .hero-line { width: 36px; height: 1px; background: var(--gold); margin: 1rem 0; }
+  .hero-meta { display: flex; gap: 1.5rem; font-size: 11px; color: rgba(200,169,110,.6); letter-spacing: .06em; }
+
+  /* Flight strip */
+  .flight-strip {
+    background: var(--ink2);
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 6px;
+    padding: .75rem 1.2rem;
+    border-bottom: 1px solid rgba(200,169,110,.2);
+  }
+  .fl-time { font-size: 1.2rem; font-weight: 700; color: #FAF7F2; }
+  .fl-label { font-size: 9px; color: rgba(200,169,110,.7); letter-spacing: .12em; text-transform: uppercase; }
+  .fl-code { font-size: .7rem; color: var(--gold); }
+  .fl-arrow { color: var(--gold); font-size: 1rem; opacity: .7; }
+  .fl-right { text-align: right; }
+
+  /* Bottom Nav */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 480px;
+    background: var(--ink);
+    display: flex;
+    border-top: 1px solid rgba(200,169,110,.15);
+    z-index: 100;
+  }
+  .nav-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    padding: .6rem .2rem calc(.6rem + env(safe-area-inset-bottom));
+    cursor: pointer; transition: all .2s;
+    font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
+    color: rgba(200,169,110,.4);
+    border: none; background: none;
+  }
+  .nav-item i { font-size: 1.1rem; margin-bottom: 3px; }
+  .nav-item.active { color: var(--gold); }
+  .nav-item:active { transform: scale(.92); }
+
+  /* Pages */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* Section header */
+  .sec-head {
+    padding: 1.2rem 1.25rem .5rem;
+    display: flex; align-items: baseline; gap: .5rem;
+  }
+  .sec-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; }
+  .sec-head span { font-size: .7rem; letter-spacing: .15em; color: var(--gold); text-transform: uppercase; }
+
+  /* Day pills */
+  .day-pills { display: flex; gap: 6px; padding: 0 1.25rem .75rem; overflow-x: auto; scrollbar-width: none; }
+  .day-pills::-webkit-scrollbar { display: none; }
+  .day-pill {
+    flex: none; padding: 5px 14px; border-radius: 20px;
+    font-size: 11px; font-weight: 500; border: 1px solid var(--border);
+    background: white; color: #8C7A6A; cursor: pointer; transition: all .2s;
+    white-space: nowrap;
+  }
+  .day-pill.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+
+  /* Timeline */
+  .timeline { padding: 0 1.25rem 1rem; }
+  .tl-item { display: flex; gap: 0; margin-bottom: 0; }
+  .tl-left { width: 52px; flex-shrink: 0; text-align: right; padding-right: 10px; padding-top: 3px; }
+  .tl-time { font-size: 10px; color: var(--mist); font-weight: 500; }
+  .tl-mid { width: 18px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .tl-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0; margin-top: 4px;
+    box-shadow: 0 0 0 2px rgba(200,169,110,.2);
+  }
+  .tl-dot.meal { background: var(--terracotta); box-shadow: 0 0 0 2px rgba(196,89,58,.2); }
+  .tl-dot.transport { background: var(--mist); }
+  .tl-dot.hotel { background: var(--sage); }
+  .tl-dot.highlight { background: var(--gold); box-shadow: 0 0 0 4px rgba(200,169,110,.25); }
+  .tl-line { width: 1px; flex: 1; background: var(--border); min-height: 14px; }
+  .tl-right { flex: 1; padding-bottom: 1rem; padding-left: 6px; }
+  .tl-card {
+    background: white; border: .5px solid var(--border);
+    border-radius: 12px; padding: .7rem .9rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  }
+  .tl-card.highlight-card { border-color: rgba(200,169,110,.5); background: var(--gold-pale); }
+  .tl-card.meal-card { border-left: 3px solid var(--terracotta); }
+  .tl-card.hotel-card { border-left: 3px solid var(--sage); }
+  .tl-type { font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
+  .tl-type.meal { color: var(--terracotta); }
+  .tl-type.transport { color: var(--mist); }
+  .tl-type.hotel { color: var(--sage); }
+  .tl-name { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.35; }
+  .tl-desc { font-size: 11px; color: #7A6E66; margin-top: 3px; line-height: 1.5; }
+  .tl-tip {
+    display: flex; align-items: flex-start; gap: 5px;
+    margin-top: 6px; padding-top: 6px;
+    border-top: .5px solid var(--border);
+    font-size: 10.5px; color: #8C7A6A; font-style: italic; line-height: 1.4;
+  }
+  .tl-tip i { color: var(--gold); font-size: 10px; margin-top: 1px; flex-shrink: 0; }
+  .map-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 6px; padding: 4px 10px; border-radius: 20px;
+    border: .5px solid var(--gold); color: #8C6B2A;
+    font-size: 10px; text-decoration: none; font-weight: 500;
+    background: rgba(200,169,110,.08);
+  }
+
+  /* Meal summary */
+  .meal-row {
+    display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;
+  }
+  .meal-chip {
+    font-size: 10px; padding: 2px 8px; border-radius: 10px;
+    background: rgba(196,89,58,.08); color: var(--terracotta);
+    border: .5px solid rgba(196,89,58,.2);
+  }
+
+  /* Guide */
+  .guide-card {
+    margin: 0 1.25rem .9rem;
+    background: white; border: .5px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .guide-img {
+    width: 100%; height: 140px; object-fit: cover;
+    background: linear-gradient(135deg, #2D4A3E 0%, #1A3028 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(200,169,110,.5); font-size: 2.5rem;
+  }
+  .guide-body { padding: .9rem 1rem 1rem; }
+  .guide-tag {
+    font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: .3rem;
+  }
+  .guide-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: .4rem; }
+  .guide-text { font-size: 12px; color: #6E6660; line-height: 1.7; }
+  .guide-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: .7rem; }
+  .guide-fact {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 10px; color: var(--mist);
+    background: #F5F0EA; padding: 3px 8px; border-radius: 8px;
+  }
+  .guide-fact i { font-size: 10px; }
+
+  /* Wallet */
+  .wallet-section { padding: 0 1.25rem; }
+  .rate-card {
+    background: var(--ink); border-radius: 14px;
+    padding: 1.2rem 1.2rem .9rem; margin-bottom: .9rem;
+    position: relative; overflow: hidden;
+  }
+  .rate-card::before {
+    content: '₫'; position: absolute; right: -10px; top: -10px;
+    font-size: 7rem; color: rgba(200,169,110,.06);
+    font-family: 'Cormorant Garamond', serif; font-weight: 700;
+    line-height: 1;
+  }
+  .rate-label { font-size: 9px; letter-spacing: .18em; color: rgba(200,169,110,.7); text-transform: uppercase; margin-bottom: .4rem; }
+  .rate-big { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; color: white; }
+  .rate-unit { font-size: .85rem; color: var(--gold); margin-left: 4px; }
+  .rate-note { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 2px; }
+  .rate-edit { position: absolute; top: 1rem; right: 1rem; font-size: 11px; color: var(--gold); opacity: .7; cursor: pointer; }
+
+  .calc-card {
+    background: white; border: .5px solid var(--border);
+    border-radius: 12px; padding: 1rem; margin-bottom: .9rem;
+  }
+  .calc-display {
+    background: var(--cream); border: .5px solid var(--border);
+    border-radius: 8px; padding: .6rem .9rem; margin-bottom: .6rem;
+    font-size: 1.2rem; font-weight: 500; color: var(--ink); min-height: 2.8rem;
+    text-align: right; word-break: break-all;
+  }
+  .calc-result { font-size: .8rem; color: var(--mist); text-align: right; margin-top: 2px; min-height: 1.2rem; }
+  .calc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+  .calc-btn {
+    padding: .7rem .3rem; border-radius: 8px; border: .5px solid var(--border);
+    background: white; font-size: .9rem; font-weight: 500;
+    color: var(--ink); cursor: pointer; text-align: center;
+    transition: all .15s; -webkit-tap-highlight-color: transparent;
+  }
+  .calc-btn:active { transform: scale(.93); background: #F0EAE0; }
+  .calc-btn.op { color: var(--gold); font-weight: 600; }
+  .calc-btn.eq { background: var(--ink); color: var(--gold); border-color: var(--ink); grid-column: span 2; }
+  .calc-btn.del { color: var(--terracotta); }
+  .calc-btn.zero { grid-column: span 1; }
+  .calc-cur-row { display: flex; gap: 6px; margin-bottom: .5rem; }
+  .cur-pill {
+    flex: 1; padding: 5px; text-align: center; border-radius: 8px;
+    border: .5px solid var(--border); font-size: 11px; font-weight: 500;
+    cursor: pointer; transition: all .2s; background: white; color: #8C7A6A;
+  }
+  .cur-pill.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+
+  /* Ledger */
+  .ledger-card {
+    background: white; border: .5px solid var(--border);
+    border-radius: 12px; padding: .9rem 1rem; margin-bottom: .9rem;
+  }
+  .ledger-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .6rem; }
+  .ledger-title { font-size: 13px; font-weight: 500; }
+  .add-btn {
+    display: flex; align-items: center; gap: 4px;
+    padding: 5px 12px; border-radius: 20px; border: .5px solid var(--gold);
+    background: none; color: #8C6B2A; font-size: 11px; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .add-form { display: none; flex-direction: column; gap: 7px; margin-top: .6rem; }
+  .add-form.open { display: flex; }
+  .add-form input, .add-form select {
+    width: 100%; padding: 8px 10px;
+    border: .5px solid var(--border); border-radius: 8px;
+    font-size: 14px; font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream); color: var(--ink); outline: none;
+  }
+  .add-form input:focus, .add-form select:focus { border-color: var(--gold); }
+  .form-row { display: flex; gap: 7px; }
+  .form-row input { flex: 1; }
+  .photo-btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 8px; border-radius: 8px; border: 1px dashed var(--border);
+    background: var(--cream); color: var(--mist); font-size: 12px; cursor: pointer;
+  }
+  .confirm-btn {
+    width: 100%; padding: 9px; background: var(--ink); color: var(--gold);
+    border: none; border-radius: 8px; font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: 'Noto Sans TC', sans-serif;
+  }
+  .ledger-entry {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 0; border-bottom: .5px solid #F5EFE6;
+  }
+  .ledger-thumb {
+    width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0;
+    object-fit: cover; background: var(--cream);
+    border: .5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: #C8B89A; font-size: .8rem;
+  }
+  .entry-info { flex: 1; min-width: 0; }
+  .entry-name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .entry-date { font-size: 10px; color: var(--mist); }
+  .entry-amounts { text-align: right; flex-shrink: 0; }
+  .entry-vnd { font-size: 13px; font-weight: 500; }
+  .entry-twd { font-size: 10px; color: var(--mist); }
+  .day-total {
+    display: flex; justify-content: space-between;
+    background: var(--gold-pale); border-radius: 8px; padding: 6px 10px; margin-top: 4px;
+    font-size: 11px; font-weight: 500;
+  }
+
+  /* Lists */
+  .checklist-card {
+    margin: 0 1.25rem .9rem;
+    background: white; border: .5px solid var(--border);
+    border-radius: 12px; padding: .9rem 1rem;
+  }
+  .check-group-title {
+    font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: .5rem; margin-top: .6rem;
+  }
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0; border-bottom: .5px solid #F5EFE6; cursor: pointer;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0;
+    border: 1.5px solid var(--border); display: flex; align-items: center;
+    justify-content: center; transition: all .2s;
+  }
+  .check-box.done { background: var(--sage); border-color: var(--sage); }
+  .check-box.done::after { content: '✓'; color: white; font-size: 11px; font-weight: 700; }
+  .check-label { font-size: 13px; flex: 1; transition: all .2s; }
+  .check-label.done { text-decoration: line-through; color: #B0A898; }
+
+  /* Memo */
+  .memo-card {
+    margin: 0 1.25rem .9rem;
+    background: white; border: .5px solid var(--border);
+    border-radius: 12px; padding: .9rem 1rem;
+  }
+  .memo-title { font-size: 13px; font-weight: 500; margin-bottom: .6rem; display: flex; justify-content: space-between; align-items: center; }
+  #memo-input {
+    width: 100%; border: .5px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 13px; background: var(--cream);
+    resize: vertical; min-height: 80px; color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif; outline: none;
+  }
+  #memo-input:focus { border-color: var(--gold); }
+  .memo-save {
+    margin-top: 6px; width: 100%; padding: 7px; background: var(--ink); color: var(--gold);
+    border: none; border-radius: 8px; font-size: 12px; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .memo-entry {
+    font-size: 12px; line-height: 1.65; padding: 7px 0;
+    border-bottom: .5px solid #F5EFE6; color: #3D342A;
+  }
+  .memo-entry:last-child { border-bottom: none; }
+  .memo-entry a { color: var(--gold); text-decoration: underline; }
+  .memo-del { float: right; font-size: 10px; color: #C4BAB0; cursor: pointer; margin-left: 6px; }
+
+  /* Info */
+  .info-card {
+    margin: 0 1.25rem .9rem;
+    background: white; border: .5px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .info-head {
+    background: var(--ink); padding: .7rem 1rem;
+    display: flex; align-items: center; gap: 8px;
+    color: var(--gold); font-size: 12px; font-weight: 500;
+    letter-spacing: .05em;
+  }
+  .info-head i { font-size: 14px; }
+  .info-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .6rem 1rem; border-bottom: .5px solid #F5EFE6;
+    font-size: 12px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-label { color: #7A6E66; }
+  .info-val { font-weight: 500; }
+  .info-val a { color: var(--gold); text-decoration: none; }
+  .warning-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: .55rem 1rem; border-bottom: .5px solid #F5EFE6; font-size: 11.5px;
+  }
+  .warning-item:last-child { border-bottom: none; }
+  .warning-item i { color: var(--terracotta); margin-top: 2px; flex-shrink: 0; }
+
+  /* Map iframe */
+  .map-iframe { width: 100%; height: 200px; border: none; border-radius: 0 0 12px 12px; display: block; }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .page.active > * { animation: fadeUp .3s ease both; }
+  .page.active > *:nth-child(2) { animation-delay: .05s; }
+  .page.active > *:nth-child(3) { animation-delay: .1s; }
+  .page.active > *:nth-child(4) { animation-delay: .15s; }
+
+  /* Hidden file input */
+  #photo-input { display: none; }
+
+  .del-entry { font-size: 10px; color: #C4BAB0; cursor: pointer; flex-shrink: 0; padding: 4px; }
+  
+  /* 阻止 iOS 點擊輸入框時自動放大畫面 */
+  .add-form input, 
+  .add-form select, 
+  #memo-input {
+  font-size: 16px !important;
+  }
+ 
+  /* 停用整個網頁的雙擊放大功能，同時保留正常的網頁滾動與點擊 */
+  body {
+  touch-action: manipulation;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div style="position:relative;z-index:1">
+    <div class="hero-tag">旅行計劃 · June 2026</div>
+    <div class="hero-title">越南<br>河內・下龍灣</div>
+    <div class="hero-sub">Hà Nội · Hạ Long Bay</div>
+    <div class="hero-line"></div>
+    <div class="hero-meta">
+      <span>6/26 — 6/30</span>
+      <span>5 Days 4 Nights</span>
+      <span>長榮航空</span>
+    </div>
+  </div>
+</div>
+
+<!-- Flight strips -->
+<div class="flight-strip">
+  <div>
+    <div class="fl-time">09:00</div>
+    <div class="fl-label">桃園 TPE</div>
+    <div class="fl-code">BR397 · 6/26</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:4px;padding:0 4px">
+    <div style="width:20px;height:1px;background:rgba(200,169,110,.4)"></div>
+    <i class="fa-solid fa-plane fa-sm" style="color:var(--gold);opacity:.7"></i>
+    <div style="width:20px;height:1px;background:rgba(200,169,110,.4)"></div>
+  </div>
+  <div class="fl-right">
+    <div class="fl-time">11:05</div>
+    <div class="fl-label">河內 HAN</div>
+    <div class="fl-code">2h 05m</div>
+  </div>
+</div>
+<div class="flight-strip" style="border-top:.5px solid rgba(200,169,110,.1)">
+  <div>
+    <div class="fl-time">12:05</div>
+    <div class="fl-label">河內 HAN</div>
+    <div class="fl-code">BR398 · 6/30</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:4px;padding:0 4px">
+    <div style="width:20px;height:1px;background:rgba(200,169,110,.4)"></div>
+    <i class="fa-solid fa-plane-arrival fa-sm" style="color:var(--gold);opacity:.7"></i>
+    <div style="width:20px;height:1px;background:rgba(200,169,110,.4)"></div>
+  </div>
+  <div class="fl-right">
+    <div class="fl-time">15:55</div>
+    <div class="fl-label">桃園 TPE</div>
+    <div class="fl-code">2h 50m</div>
+  </div>
+</div>
+
+<!-- ===== PLAN PAGE ===== -->
+<div id="page-plan" class="page active">
+  <div class="sec-head"><h2>每日行程</h2><span>Itinerary</span></div>
+
+  <div class="day-pills" id="dayPills">
+    <button class="day-pill active" onclick="switchDay(0,this)">D1 · 6/26</button>
+    <button class="day-pill" onclick="switchDay(1,this)">D2 · 6/27</button>
+    <button class="day-pill" onclick="switchDay(2,this)">D3 · 6/28</button>
+    <button class="day-pill" onclick="switchDay(3,this)">D4 · 6/29</button>
+    <button class="day-pill" onclick="switchDay(4,this)">D5 · 6/30</button>
+  </div>
+
+  <div class="timeline" id="timelineContent"></div>
+</div>
+
+<!-- ===== GUIDE PAGE ===== -->
+<div id="page-guide" class="page">
+  <div class="sec-head"><h2>深度導覽</h2><span>Guide</span></div>
+
+  <div class="guide-card">
+    <div class="guide-img">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Ha_Long_Bay_001.jpg/800px-Ha_Long_Bay_001.jpg"
+           alt="下龍灣" style="width:100%;height:140px;object-fit:cover"
+           onerror="this.style.display='none'">
+    </div>
+    <div class="guide-body">
+      <div class="guide-tag">UNESCO · 世界遺產</div>
+      <div class="guide-title">下龍灣 Hạ Long Bay</div>
+      <div class="guide-text">
+        「下龍」在越南語中意為「龍降之地」，傳說神龍以噴火吐珠擊退入侵者，珠玉落海化為無數島嶼。灣內約有 1,969 座石灰岩島嶼，每座形態各異——猿猴島、鬥雞石、蟾蜍石，皆是大自然的傑作。整個灣區水面面積達 1,553 平方公里，1994 年列入聯合國教科文組織世界遺產名錄。最佳觀賞時機為清晨薄霧初散之際，山水倒影如水墨畫，令人嘆為觀止。
+      </div>
+      <div class="guide-facts">
+        <div class="guide-fact"><i class="fa-solid fa-mountain"></i> 1,969 座島嶼</div>
+        <div class="guide-fact"><i class="fa-solid fa-star"></i> UNESCO 1994</div>
+        <div class="guide-fact"><i class="fa-solid fa-water"></i> 蘭夏灣內航行</div>
+      </div>
+      <a class="map-btn" href="https://maps.google.com/?q=Ha+Long+Bay" target="_blank" style="margin-top:.8rem;display:inline-flex">
+        <i class="fa-solid fa-map-location-dot"></i> Google Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="guide-card">
+    <div class="guide-img" style="background:linear-gradient(135deg,#2A3D2A 0%,#1A2A1A 100%);display:flex;align-items:center;justify-content:center;font-size:2.5rem">
+      🚢
+    </div>
+    <div class="guide-body">
+      <div class="guide-tag">頂級遊輪體驗</div>
+      <div class="guide-title">印太之星號 Indochine Grand Cruise</div>
+      <div class="guide-text">
+        Indochine Grand Cruise 是蘭夏灣（Lan Ha Bay）上數一數二的精品遊輪，以印度支那殖民風格設計，柚木甲板、藤製傢俱、手工磁磚，每個細節都充滿法殖時期的典雅韻味。蘭夏灣因開放較晚，遊客遠少於主灣，洞穴與漁村更加原始。最特別的是夜釣墨魚——在繁星之下用漁燈吸引烏賊浮出水面，是一種既療癒又難忘的海上體驗。
+      </div>
+      <div class="guide-facts">
+        <div class="guide-fact"><i class="fa-solid fa-utensils"></i> 國際美食套餐</div>
+        <div class="guide-fact"><i class="fa-solid fa-moon"></i> 夜釣墨魚</div>
+        <div class="guide-fact"><i class="fa-solid fa-person-swimming"></i> 竹筏探洞</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-card">
+    <div class="guide-img" style="background:linear-gradient(135deg,#3D2A1A 0%,#2A1A0A 100%);display:flex;align-items:center;justify-content:center;font-size:2.5rem">
+      🛺
+    </div>
+    <div class="guide-body">
+      <div class="guide-tag">河內 · 城市探索</div>
+      <div class="guide-title">吉普車城市探索 & 36 古街</div>
+      <div class="guide-text">
+        河內舊城 36 古街形成於 11 世紀李朝，每條街道以行業命名，如錫街、竹街、棉街。至今仍保留著前店後居的傳統格局，窄而深的「管屋」建築是其特色。乘坐美式復古吉普車穿梭其間，是最時髦的遊覽方式。<br><br>
+        <strong style="color:var(--ink);font-size:11.5px">🥚 雞蛋咖啡（Cà Phê Trứng）</strong>：1946 年由 Nguyễn Văn Giang 發明，當時牛奶短缺以蛋黃代替，將蛋黃與煉奶打發成濃郁泡沫覆蓋在濃縮咖啡上，甜而不膩，是河內的味道名片。
+      </div>
+      <div class="guide-facts">
+        <div class="guide-fact"><i class="fa-solid fa-clock-rotate-left"></i> 11 世紀李朝</div>
+        <div class="guide-fact"><i class="fa-solid fa-mug-hot"></i> 雞蛋咖啡必試</div>
+        <div class="guide-fact"><i class="fa-solid fa-road"></i> 1.5~2 小時車程</div>
+      </div>
+      <a class="map-btn" href="https://maps.google.com/?q=Hoan+Kiem+Old+Quarter+Hanoi" target="_blank" style="margin-top:.8rem;display:inline-flex">
+        <i class="fa-solid fa-map-location-dot"></i> Google Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="guide-card">
+    <div style="border-radius:14px 14px 0 0;overflow:hidden">
+      <iframe class="map-iframe" style="border-radius:0"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=105.7,20.9,106.0,21.1&layer=mapnik&marker=20.978,105.844"
+        allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="guide-body">
+      <div class="guide-tag">景點地圖</div>
+      <div class="guide-title">河內市區</div>
+      <div class="guide-text">還劍湖、36 古街、胡志明廣場、河內歌劇院皆在此區域，步行均可串聯。</div>
+    </div>
+  </div>
+
+  <div class="guide-card">
+    <div style="background:linear-gradient(135deg,#1A2A3D 0%,#0A1A2D 100%);height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem">
+      🎭
+    </div>
+    <div class="guide-body">
+      <div class="guide-tag">河內 · 夜間文化</div>
+      <div class="guide-title">河內大世界 Mega Grand World</div>
+      <div class="guide-text">
+        融合歐洲小鎮與越南傳統文化的大型主題公園，佔地超過 70 公頃。貢多拉遊船穿行於仿威尼斯水道，日落後燈光秀令人目眩神迷。附設大型購物商場、美食街及文化演出，是近年河內最受歡迎的夜間景點之一。
+      </div>
+      <div class="guide-facts">
+        <div class="guide-fact"><i class="fa-solid fa-ship"></i> 貢多拉遊船（含）</div>
+        <div class="guide-fact"><i class="fa-solid fa-lightbulb"></i> 夜間燈光秀</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WALLET PAGE ===== -->
+<div id="page-wallet" class="page">
+  <div class="sec-head"><h2>記帳錢包</h2><span>Wallet</span></div>
+  <div class="wallet-section">
+
+    <!-- Rate Card -->
+    <div class="rate-card">
+      <div class="rate-label">台幣 TWD → 越南盾 VND</div>
+      <div style="display:flex;align-items:baseline;gap:4px">
+        <span style="font-size:1rem;color:rgba(200,169,110,.6)">1 TWD ≈</span>
+        <span class="rate-big" id="rateDisplay">1,260</span>
+        <span class="rate-unit">VND</span>
+      </div>
+      <div class="rate-note">預設 1 TWD = 841 VND，可手動修改</div>
+      <div style="display:flex;gap:8px;margin-top:.6rem">
+        <div onclick="editRate()" style="padding:4px 10px;border:.5px solid rgba(200,169,110,.3);border-radius:20px;font-size:11px;color:var(--gold);cursor:pointer;display:flex;align-items:center;gap:4px"><i class="fa-solid fa-pen-to-square"></i> 修改匯率</div>
+        <a href="https://www.google.com/search?q=TWD+VND+匯率+今日" target="_blank" style="padding:4px 10px;border:.5px solid rgba(200,169,110,.3);border-radius:20px;font-size:11px;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:4px"><i class="fa-solid fa-arrow-up-right-from-square"></i> 查今日匯率</a>
+      </div>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calc-card">
+      <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">快速換算計算機</div>
+      <div class="calc-cur-row">
+        <button class="cur-pill active" id="curVND" onclick="setCur('VND')">VND 輸入</button>
+        <button class="cur-pill" id="curTWD" onclick="setCur('TWD')">TWD 輸入</button>
+      </div>
+      <div class="calc-display" id="calcDisplay">0</div>
+      <div class="calc-result" id="calcResult">—</div>
+      <div class="calc-grid">
+        <button class="calc-btn" onclick="calcInput('7')">7</button>
+        <button class="calc-btn" onclick="calcInput('8')">8</button>
+        <button class="calc-btn" onclick="calcInput('9')">9</button>
+        <button class="calc-btn op" onclick="calcInput('÷')">÷</button>
+
+        <button class="calc-btn" onclick="calcInput('4')">4</button>
+        <button class="calc-btn" onclick="calcInput('5')">5</button>
+        <button class="calc-btn" onclick="calcInput('6')">6</button>
+        <button class="calc-btn op" onclick="calcInput('×')">×</button>
+
+        <button class="calc-btn" onclick="calcInput('1')">1</button>
+        <button class="calc-btn" onclick="calcInput('2')">2</button>
+        <button class="calc-btn" onclick="calcInput('3')">3</button>
+        <button class="calc-btn op" onclick="calcInput('-')">−</button>
+
+        <button class="calc-btn" onclick="calcInput('0')">0</button>
+        <button class="calc-btn op" onclick="calcInput('+')">+</button>
+        <button class="calc-btn del" onclick="calcDel()"><i class="fa-solid fa-delete-left"></i></button>
+        <button class="calc-btn op" onclick="calcInput('.')">.</button>
+
+        
+        <button class="calc-btn eq" style="grid-column: span 2;" onclick="calcEqual()">=</button>
+  <div></div>
+  <button class="calc-btn" style="color: #E11D48; font-weight: 700; background: #FFF1F2; border-color: #FECDD3;" onclick="calcClear()">C</button>
+      </div>
+    </div>
+
+    <!-- Add Expense -->
+    <div class="ledger-card">
+      <div class="ledger-head">
+        <span class="ledger-title"><i class="fa-solid fa-receipt" style="color:var(--gold);margin-right:5px"></i>旅行記帳</span>
+        <button class="add-btn" onclick="toggleAddForm()"><i class="fa-solid fa-plus"></i> 新增</button>
+      </div>
+      <div class="add-form" id="addForm">
+        <input type="text" id="expName" placeholder="消費項目（如：午餐、按摩）">
+        <div class="form-row">
+          <input type="number" id="expAmt" placeholder="金額">
+          <select id="expCur" style="width:80px;flex:none">
+            <option value="VND">VND</option>
+            <option value="TWD">TWD</option>
+          </select>
+        </div>
+        <select id="expDay">
+          <option value="D1">D1 · 6/26</option>
+          <option value="D2">D2 · 6/27</option>
+          <option value="D3">D3 · 6/28</option>
+          <option value="D4">D4 · 6/29</option>
+          <option value="D5">D5 · 6/30</option>
+        </select>
+        <label class="photo-btn" for="photo-input">
+          <i class="fa-solid fa-camera" style="color:var(--gold)"></i>
+          <span id="photoLabel">拍照 / 上傳收據照片</span>
+        </label>
+        <input type="file" id="photo-input" accept="image/*" capture="environment" onchange="handlePhoto(this)">
+        <img id="photoPreview" style="display:none;width:100%;border-radius:8px;max-height:120px;object-fit:cover">
+        <button class="confirm-btn" onclick="addExpense()">記下這筆 ✓</button>
+      </div>
+      <div id="ledgerList"></div>
+      <div id="ledgerTotal" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LISTS PAGE ===== -->
+<div id="page-lists" class="page">
+  <div class="sec-head"><h2>清單備忘</h2><span>Lists</span></div>
+
+  <!-- Checklist -->
+  <div class="checklist-card">
+    <div style="font-size:13px;font-weight:500;margin-bottom:.3rem"><i class="fa-solid fa-check-double" style="color:var(--gold);margin-right:5px"></i>行前準備 CheckList</div>
+    <div id="checkProgress" style="font-size:10px;color:var(--mist);margin-bottom:.6rem">0 / 0 完成</div>
+
+    <div class="check-group-title">物品</div>
+    <div id="checklistItems"></div>
+  </div>
+
+  <!-- Memo -->
+  <div class="memo-card">
+    <div class="memo-title">
+      <span><i class="fa-solid fa-note-sticky" style="color:var(--gold);margin-right:5px"></i>個人備忘錄</span>
+    </div>
+    <textarea id="memo-input" placeholder="輸入備忘文字或網址…"></textarea>
+    <button class="memo-save" onclick="saveMemo()">儲存備忘 ↵</button>
+    <div id="memoList" style="margin-top:.6rem"></div>
+  </div>
+</div>
+
+<!-- ===== INFO PAGE ===== -->
+<div id="page-info" class="page">
+  <div class="sec-head"><h2>旅遊資訊</h2><span>Info</span></div>
+
+  <!-- Weather -->
+  <div class="info-card">
+    <div class="info-head"><i class="fa-solid fa-cloud-sun"></i> 天氣預報</div>
+    <div class="info-row">
+      <span class="info-label">河內天氣</span>
+      <span class="info-val"><a href="https://www.weather.gov.vn/" target="_blank">越南氣象局 ↗</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Windy（風速）</span>
+      <span class="info-val"><a href="https://www.windy.com/21.028/105.844?rain,21.028,105.844,8" target="_blank">查看 ↗</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">6月平均氣溫</span>
+      <span class="info-val">27–35°C · 梅雨季</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">建議穿著</span>
+      <span class="info-val">輕薄透氣 + 雨具</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">與台灣時差</span>
+      <span class="info-val">慢1小時 (TW 10:00 <－> VNM 09:00) </span>
+    </div>
+
+  </div>
+
+  <!-- Emergency -->
+  <div class="info-card">
+    <div class="info-head"><i class="fa-solid fa-phone-volume"></i> 緊急聯絡</div>
+    <div class="info-row">
+      <span class="info-label">警察</span>
+      <span class="info-val"><a href="tel:113">113</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">救護車</span>
+      <span class="info-val"><a href="tel:115">115</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">消防</span>
+      <span class="info-val"><a href="tel:114">114</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">台灣駐越辦事處</span>
+      <span class="info-val"><a href="tel:+84-24-3833-5501">+84-24-3833-5501</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">外交部緊急專線</span>
+      <span class="info-val"><a href="tel:+886-800-085-095">0800-085-095</a></span>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="info-card">
+    <div class="info-head"><i class="fa-solid fa-triangle-exclamation"></i> 注意事項 & 禁忌</div>
+    <div class="warning-item"><i class="fa-solid fa-ban"></i><span>禁止攜帶毒品入境，刑責極重，零容忍。</span></div>
+    <div class="warning-item"><i class="fa-solid fa-ban"></i><span>下龍灣全面禁止一次性塑膠製品，請自備水瓶。</span></div>
+    <div class="warning-item"><i class="fa-solid fa-circle-exclamation"></i><span>搭乘計程車請確認跳表，建議使用 Grab App 叫車避免被坑。</span></div>
+    <div class="warning-item"><i class="fa-solid fa-circle-exclamation"></i><span>遊船上下岸需穿救生衣，請配合工作人員指示。</span></div>
+    <div class="warning-item"><i class="fa-solid fa-circle-exclamation"></i><span>晚餐著半正式休閒裝，勿穿短褲、拖鞋入船上餐廳。</span></div>
+    <div class="warning-item"><i class="fa-solid fa-circle-exclamation"></i><span>遇颱風、大霧等不可抗力，碼頭管制時將改為岸上替代行程。</span></div>
+    <div class="warning-item"><i class="fa-solid fa-circle-exclamation"></i><span>寺廟景區請著裝保守，脫帽入內以示尊重。</span></div>
+    <div class="warning-item"><i class="fa-solid fa-coins"></i><span>越南盾面額大，付款前確認金額，10 萬 VND ≈ NT$120。</span></div>
+  </div>
+
+  <!-- Included gifts -->
+  <div class="info-card">
+    <div class="info-head"><i class="fa-solid fa-gift"></i> 行程貼心好禮</div>
+    <div class="info-row"><span class="info-label">📸</span><span class="info-val">團體照乙張</span></div>
+    <div class="info-row"><span class="info-label">🌿</span><span class="info-val">萬靈油（玉桂油）</span></div>
+    <div class="info-row"><span class="info-label">👒</span><span class="info-val">越南傳統斗笠</span></div>
+    <div class="info-row"><span class="info-label">💧</span><span class="info-val">每日礦泉水一瓶</span></div>
+  </div>
+
+  <div style="height:.5rem"></div>
+</div>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <button class="nav-item active" id="nav-plan" onclick="switchPage('plan')">
+    <i class="fa-solid fa-map"></i>行程
+  </button>
+  <button class="nav-item" id="nav-guide" onclick="switchPage('guide')">
+    <i class="fa-solid fa-compass"></i>導覽
+  </button>
+  <button class="nav-item" id="nav-wallet" onclick="switchPage('wallet')">
+    <i class="fa-solid fa-wallet"></i>記帳
+  </button>
+  <button class="nav-item" id="nav-lists" onclick="switchPage('lists')">
+    <i class="fa-solid fa-list-check"></i>清單
+  </button>
+  <button class="nav-item" id="nav-info" onclick="switchPage('info')">
+    <i class="fa-solid fa-circle-info"></i>資訊
+  </button>
+</nav>
+
+<script>
+// ===== DATA =====
+const DAYS = [
+  {
+    label:'DAY 1', date:'6/26 (四)', title:'桃園 → 下龍灣',
+    events:[
+      {time:'09:00',type:'transport',typeName:'航班',name:'長榮航空 BR397 起飛',desc:'桃園國際機場出發，飛往河內內排國際機場',tip:'建議起飛前3小時抵達機場完成報到'},
+      {time:'11:05',type:'transport',typeName:'抵達',name:'抵達河內內排機場',desc:'入境後前往領行李，搭乘遊覽車前往下龍灣（高速公路車程約 2 小時）',tip:'建議換少量越南盾備用，機場 ATM 匯率尚可'},
+      {time:'13:00',type:'meal',typeName:'午餐',name:'MAM MOM 越式風味餐',desc:'抵達途中享用越式風味午餐，含啤酒或軟飲一瓶（US$15）',tip:'越式春卷、河粉、炸春卷，一起體驗在地口味'},
+      {time:'15:00',type:'spot',typeName:'景點',name:'皇后雙層纜車 & 太陽摩天輪',desc:'俯瞰下龍灣全景，皇后纜車橫跨海灣，摩天輪可360度欣賞石灰岩群島之美',highlight:true,mapLink:'https://maps.google.com/?q=Ba+Deo+Hill+Ha+Long'},
+      {time:'19:00',type:'meal',typeName:'晚餐',name:'蒸氣九層海鮮塔',desc:'豐盛的海鮮大餐，含啤酒或軟飲一瓶（US$20），鮮甜海味是下龍灣最道地的歡迎儀式'},
+      {time:'21:00',type:'hotel',typeName:'入住',name:'下龍灣五星飯店',desc:'The Yacht Hotel by DC 或 A La Carte HaLong Bay Hotel 或同級旅館',tip:'安頓後可至飯店泳池或酒吧欣賞夜間下龍灣景色'}
+    ],
+    meals:['早：機上簡餐','午：MAM MOM 越式餐 (US$15)','晚：海鮮塔 (US$20)']
+  },
+  {
+    label:'DAY 2', date:'6/27 (五)', title:'海上 VILLA 印太之星號',
+    events:[
+      {time:'07:00',type:'meal',typeName:'早餐',name:'飯店早餐',desc:'享用飯店豐盛早餐，補充今日充沛能量'},
+      {time:'09:00',type:'spot',typeName:'自由活動',name:'飯店自由活動',desc:'可享用飯店設施：游泳池、健身房、SPA，悠閒準備登船'},
+      {time:'11:30',type:'transport',typeName:'集合',name:'前往碼頭',desc:'⚠️ 集合出發！搭車前往下龍灣碼頭，印太之星號專屬大廳辦理登船手續',highlight:true,tip:'請準時集合，不要遲到！'},
+      {time:'12:30',type:'spot',typeName:'登船',name:'登上印太之星號 Indochine Grand Cruise',desc:'船艙經理與全體船員歡迎入場，聆聽郵輪簡介及安全說明，享用迎賓飲料'},
+      {time:'13:15',type:'meal',typeName:'午餐',name:'船上國際自助午餐',desc:'精緻國際總匯自助餐，同時郵輪緩緩駛向迷人的蘭夏灣'},
+      {time:'15:30',type:'spot',typeName:'探洞',name:'竹船探秘洞',desc:'深入「暗明洞」，竹船穿越海上秘境，通往被岩石環繞的寧靜湖泊，6人一艘，每人貢多拉船夫小費 2 萬越盾已包含於行程中。',tip:'帶好防水袋，相機做好防水，勿站立於竹船上'},
+      {time:'17:45',type:'spot',typeName:'體驗',name:'水果雕刻課 & 越南料理示範',desc:'由專業主廚帶領體驗越南美食文化，親手學習越式料理的製作秘密'},
+      {time:'19:15',type:'meal',typeName:'晚餐',name:'蘭夏灣精緻晚宴',desc:'啤酒、紅酒、白酒無限暢飲一小時，享受蘭夏灣夜間饗宴',tip:'⚠️ 請著半正式休閒裝，勿穿短褲、拖鞋'},
+      {time:'21:30',type:'spot',typeName:'夜間',name:'星空甲板 & 夜釣墨魚',desc:'在露天甲板仰望星斗，或至船尾參加夜釣墨魚，感受悠閒度假生活',tip:'帶上輕便外套，海上夜間有涼意'},
+      {time:'23:00',type:'hotel',typeName:'入住',name:'夜宿印太之星號',desc:'在海上度過難忘一夜，聆聽海浪聲入眠'}
+    ],
+    meals:['早：飯店早餐','午：船上自助餐（飲料七選一）','晚：西式套餐（紅白啤酒暢飲1小時）']
+  },
+  {
+    label:'DAY 3', date:'6/28 (六)', title:'返回河內 · 大世界',
+    events:[
+      {time:'06:00',type:'meal',typeName:'輕早餐',name:'新鮮出爐麵包 & 咖啡',desc:'在船上餐廳享用新鮮麵包、咖啡和茶，迎接最後的蘭夏灣清晨'},
+      {time:'06:15',type:'spot',typeName:'晨間',name:'甲板太極課',desc:'跟著船員在甲板上練習太極拳，為新的一天注入活力，在下龍灣的山水間運動'},
+      {time:'07:15',type:'spot',typeName:'探洞',name:'中莊洞 Trung Trang Cave',desc:'蘭夏灣最後一站！鐘乳石與石柱歷經數百萬年塑造，觸摸石柱可聽見柔和旋律',tip:'路面濕滑，請穿防滑鞋，小心行走',mapLink:'https://maps.google.com/?q=Trung+Trang+Cave+Cat+Ba'},
+      {time:'09:00',type:'meal',typeName:'早午餐',name:'船上早午餐',desc:'返程途中享用早午餐補充體力，船緩緩開回碼頭，欣賞最後的蘭夏灣美景'},
+      {time:'10:30',type:'transport',typeName:'下船',name:'離開印太之星號',desc:'乘接駁快艇返回碼頭，結束海上之旅，搭車前往河內'},
+      {time:'14:00',type:'spot',typeName:'景點',name:'河內大世界 Mega Grand World',desc:'含單程貢多拉遊船！歐洲小鎮與越南傳統文化融合的主題樂園，夜間燈光秀精彩',mapLink:'https://maps.google.com/?q=Mega+Grand+World+Hanoi'},
+      {time:'16:00',type:'spot',typeName:'放鬆',name:'90 分鐘按摩時光',desc:'三選一：① 全身按摩+熱石推背 NT$1,000　② 越式傳統全身+腳底按摩 NT$1,000　③ 越式洗頭 NT$1,200。不按摩者安排至樂天百貨自由活動，待按摩結束後一起接回享用晚餐。',tip:'按摩前多喝水，結束後記得補充水分'},
+      {time:'19:30',type:'meal',typeName:'晚餐',name:'米其林一星 TAM VI',desc:'越式精緻料理，含啤酒或軟飲一瓶（US$22），米其林認證的在地美味',mapLink:'https://maps.google.com/?q=Tam+Vi+Restaurant+Hanoi'},
+      {time:'21:30',type:'hotel',typeName:'入住',name:'河內五星飯店',desc:'Movenpick Hotel Hanoi Centre 或 Grand Mercure Hanoi Hotel 或同級旅館'}
+    ],
+    meals:['早：船上輕早餐+早午餐','午：船上早午餐','晚：米其林一星 TAM VI (US$22)']
+  },
+  {
+    label:'DAY 4', date:'6/29 (日)', title:'河內吉普車 · 古街散策',
+    events:[
+      {time:'07:00',type:'meal',typeName:'早餐',name:'飯店早餐',desc:'享用五星飯店豐盛早餐，補充充沛能量迎接今日文化探索'},
+      {time:'11:00',type:'transport',typeName:'集合',name:'⚠️ 集合出發：吉普車探索',desc:'11點準時集合上車，乘坐復古美式吉普車開始河內城市探索',highlight:true,tip:'集合請準時！吉普車體驗需準點出發'},
+      {time:'11:30',type:'spot',typeName:'探索',name:'雞蛋咖啡 & 城市巡遊',desc:'品嘗河內著名雞蛋咖啡→龍邊橋（拍照）→B-52博物館（拍照）→壁畫街（拍照），約1.5~2小時',tip:'含吉普車司機小費 3 萬 VND/人。遇雨改電瓶車+五星飯店下午茶，退費 NT$500/人',mapLink:'https://maps.google.com/?q=Hoan+Kiem+Lake+Hanoi'},
+      {time:'13:30',type:'meal',typeName:'午餐',name:'富林中式餐廳',desc:'道地中式料理，含啤酒或軟飲一瓶（US$22）'},
+      {time:'15:00',type:'spot',typeName:'自由活動',name:'36 古街散策',desc:'漫步還劍湖北側舊城區，感受 11 世紀李朝流傳至今的傳統街道風情，窄小店面、沿街小販，像走進時光隧道',tip:'可在此購買手工藝品、絲製品，記得殺價！',mapLink:'https://maps.google.com/?q=Hang+Gai+Street+Hanoi+Old+Quarter'},
+      {time:'19:30',type:'meal',typeName:'晚餐',name:'BEP PRIME 火焰雞火鍋',desc:'河內特色火焰雞火鍋，含啤酒或軟飲一瓶（US$30），香辣鮮美，是今晚最精彩的句點',mapLink:'https://maps.google.com/?q=Bep+Prime+Hanoi'},
+      {time:'21:30',type:'hotel',typeName:'入住',name:'河內五星飯店',desc:'Movenpick Hotel Hanoi Centre 或 Grand Mercure Hanoi Hotel 或同級旅館'}
+    ],
+    meals:['早：飯店早餐','午：富林中式餐 (US$22)','晚：BEP PRIME 火焰雞火鍋 (US$30)']
+  },
+  {
+    label:'DAY 5', date:'6/30 (一)', title:'返程 · 回台',
+    events:[
+      {time:'07:00',type:'meal',typeName:'早餐',name:'飯店早餐',desc:'最後一頓越南早餐，慢慢享用，回味這五天的美好旅程'},
+      {time:'09:00',type:'spot',typeName:'自由',name:'最後自由時光',desc:'可至附近咖啡廳再喝一杯雞蛋咖啡，或購買最後紀念品：Trung Nguyen 傳奇咖啡豆、越南漆器等'},
+      {time:'09:30',type:'transport',typeName:'集合',name:'⚠️ 集合 · 前往機場',desc:'專車送機，請準時集合，帶著滿滿回憶揮別越南',highlight:true,tip:'建議出發前先在飯店結清費用，確認護照、登機證在手'},
+      {time:'12:05',type:'transport',typeName:'航班',name:'長榮航空 BR398 返台',desc:'河內內排機場起飛，飛往台灣桃園國際機場',tip:'機場請提早3小時抵達辦理報到，國際線手續較費時'},
+      {time:'15:55',type:'spot',typeName:'抵達',name:'返抵桃園機場',desc:'結束這趟充實的越南五日之旅，帶著豐盛的回憶回到溫暖的家 🏠'},
+      {time:'',type:'hotel',typeName:'',name:'溫暖的家 🏡',desc:'旅程圓滿結束，好好休息！'}
+    ],
+    meals:['早：飯店早餐','午：機上簡餐']
+  }
+];
+
+const CHECKLIST = [
+  {group:'證件 & 金融',items:['護照（有效期六個月以上）','台灣居民不需越南簽證（免簽30天）','信用卡（Visa / Mastercard）','備用現金台幣（換越南盾）','旅平險']},
+  {group:'通訊 & 電子',items:['越南 eSIM 或當地 SIM 卡（提前購買）','手機充電線 & 行動電源','延長線','轉接插頭（越南為A/B型，台灣通用）','耳機']},
+  {group:'衣物 & 行李',items:['輕薄透氣衣物（6月35°C高溫）','輕便雨衣或折傘（梅雨季）','泳衣（下龍灣游泳池）','半正式休閒服（遊輪晚餐必備）','拖鞋 + 防滑涼鞋','防曬乳 SPF50+','帽子 & 太陽眼鏡']},
+  {group:'保健 & 其他',items:['腸胃藥 & 暈車藥','個人常用藥品','防蚊液','濕紙巾 & 個人衛生用品','自備環保水瓶（下龍灣禁用一次性塑膠）','小費備用零鈔（越南盾或美金）']}
+];
+
+// ===== STATE =====
+let currentDay = 0;
+let calcStr = '';
+let calcCur = 'VND';
+let expenses = JSON.parse(localStorage.getItem('vn_expenses') || '[]');
+let memos = JSON.parse(localStorage.getItem('vn_memos') || '[]');
+let checks = JSON.parse(localStorage.getItem('vn_checks') || '{}');
+let rate = parseFloat(localStorage.getItem('vn_rate') || '841');
+let photoData = null;
+
+// ===== PAGE SWITCH =====
+function switchPage(p) {
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  document.getElementById('nav-' + p).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== PLAN =====
+function switchDay(idx, btn) {
+  currentDay = idx;
+  document.querySelectorAll('.day-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderTimeline();
+}
+
+function renderTimeline() {
+  const d = DAYS[currentDay];
+  let html = '';
+
+  // Meal summary
+  html += `<div style="background:rgba(196,89,58,.07);border:.5px solid rgba(196,89,58,.2);border-radius:10px;padding:.6rem .9rem;margin-bottom:.8rem">
+    <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--terracotta);margin-bottom:4px">今日餐食</div>
+    <div class="meal-row">`;
+  d.meals.forEach(m => { html += `<span class="meal-chip">${m}</span>`; });
+  html += `</div></div>`;
+
+  d.events.forEach((e, i) => {
+    const isLast = i === d.events.length - 1;
+    const dotClass = e.type === 'meal' ? 'meal' : e.type === 'transport' ? 'transport' : e.type === 'hotel' ? 'hotel' : e.highlight ? 'highlight' : '';
+    const cardClass = e.highlight ? 'tl-card highlight-card' : e.type === 'meal' ? 'tl-card meal-card' : e.type === 'hotel' ? 'tl-card hotel-card' : 'tl-card';
+    const typeClass = e.type === 'meal' ? 'meal' : e.type === 'transport' ? 'transport' : e.type === 'hotel' ? 'hotel' : '';
+
+    html += `<div class="tl-item">
+      <div class="tl-left"><span class="tl-time">${e.time}</span></div>
+      <div class="tl-mid">
+        <div class="tl-dot ${dotClass}"></div>
+        ${!isLast ? '<div class="tl-line"></div>' : ''}
+      </div>
+      <div class="tl-right">
+        <div class="${cardClass}">
+          ${e.typeName ? `<div class="tl-type ${typeClass}">${e.typeName}</div>` : ''}
+          <div class="tl-name">${e.name}</div>
+          <div class="tl-desc">${e.desc}</div>
+          ${e.tip ? `<div class="tl-tip"><i class="fa-solid fa-lightbulb"></i>${e.tip}</div>` : ''}
+          ${e.mapLink ? `<a class="map-btn" href="${e.mapLink}" target="_blank"><i class="fa-solid fa-map-location-dot"></i> Google Maps</a>` : ''}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('timelineContent').innerHTML = html;
+}
+
+// ===== CALCULATOR =====
+function calcInput(v) {
+  if (calcStr === '0' && !isNaN(v)) calcStr = v;
+  else calcStr += v;
+  document.getElementById('calcDisplay').textContent = calcStr || '0';
+  calcPreview();
+}
+function calcDel() {
+  calcStr = calcStr.slice(0, -1);
+  document.getElementById('calcDisplay').textContent = calcStr || '0';
+  calcPreview();
+}
+function calcClear() {
+  calcStr = ''; // 1. 徹底清空背後記憶
+  document.getElementById('calcDisplay').textContent = '0'; // 2. 上方螢幕顯示 0
+  
+  // 3. 關鍵！直接把 0 丟給原本的換算顯示函數
+  // 這樣它就會自動根據目前的 calcCur 幣別，完美吐出「≈ NT$ 0 台幣」或「≈ ₫ 0 越南盾」！
+  showConverted(0); 
+}
+
+function calcEqual() {
+  try {
+    const expr = calcStr.replace(/÷/g, '/').replace(/×/g, '*');
+    const result = Function('"use strict"; return (' + expr + ')')();
+    const rounded = Math.round(result * 100) / 100;
+    calcStr = String(rounded);
+    document.getElementById('calcDisplay').textContent = rounded.toLocaleString();
+    showConverted(rounded);
+  } catch(e) {
+    document.getElementById('calcDisplay').textContent = '錯誤';
+    calcStr = '';
+  }
+}
+function calcPreview() {
+  try {
+    const expr = calcStr.replace(/÷/g, '/').replace(/×/g, '*');
+    const result = Function('"use strict"; return (' + expr + ')')();
+    if (!isNaN(result) && isFinite(result)) showConverted(result);
+  } catch(e) {}
+}
+function showConverted(val) {
+  const r = document.getElementById('calcResult');
+  if (calcCur === 'VND') {
+    const twd = Math.round(val / rate);
+    r.textContent = `≈ NT$ ${twd.toLocaleString()} 台幣`;
+  } else {
+    const vnd = Math.round(val * rate);
+    r.textContent = `≈ ₫ ${vnd.toLocaleString()} 越南盾`;
+  }
+}
+function setCur(c) {
+  calcCur = c;
+  document.getElementById('curVND').classList.toggle('active', c === 'VND');
+  document.getElementById('curTWD').classList.toggle('active', c === 'TWD');
+  calcPreview();
+}
+function editRate() {
+  const n = prompt('請輸入 1 TWD 兌換 VND 匯率：', rate);
+  if (n && !isNaN(parseFloat(n))) {
+    rate = parseFloat(n);
+    localStorage.setItem('vn_rate', rate);
+    document.getElementById('rateDisplay').textContent = rate.toLocaleString();
+  }
+}
+
+// ===== WALLET =====
+function toggleAddForm() {
+  const f = document.getElementById('addForm');
+  f.classList.toggle('open');
+  photoData = null;
+  document.getElementById('photoPreview').style.display = 'none';
+  document.getElementById('photoLabel').textContent = '拍照 / 上傳收據照片';
+}
+
+function handlePhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxW = 400, maxH = 300;
+      let w = img.width, h = img.height;
+      if (w > maxW) { h = h * maxW / w; w = maxW; }
+      if (h > maxH) { w = w * maxH / h; h = maxH; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      photoData = canvas.toDataURL('image/jpeg', 0.6);
+      const prev = document.getElementById('photoPreview');
+      prev.src = photoData; prev.style.display = 'block';
+      document.getElementById('photoLabel').textContent = '✓ 已選擇照片';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function addExpense() {
+  const name = document.getElementById('expName').value.trim();
+  const amt = parseFloat(document.getElementById('expAmt').value);
+  const cur = document.getElementById('expCur').value;
+  const day = document.getElementById('expDay').value;
+  if (!name || !amt) { alert('請填寫品項和金額'); return; }
+  expenses.push({ id: Date.now(), name, amt, cur, day, photo: photoData, date: new Date().toLocaleString('zh-TW', {month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}) });
+  localStorage.setItem('vn_expenses', JSON.stringify(expenses));
+  photoData = null;
+  document.getElementById('addForm').classList.remove('open');
+  document.getElementById('expName').value = '';
+  document.getElementById('expAmt').value = '';
+  document.getElementById('photoPreview').style.display = 'none';
+  renderLedger();
+}
+
+function deleteExpense(id) {
+  expenses = expenses.filter(e => e.id !== id);
+  localStorage.setItem('vn_expenses', JSON.stringify(expenses));
+  renderLedger();
+}
+
+function renderLedger() {
+  const list = document.getElementById('ledgerList');
+  const totalEl = document.getElementById('ledgerTotal');
+  if (!expenses.length) {
+    list.innerHTML = '<div style="font-size:12px;color:var(--mist);padding:8px 0;text-align:center">尚無記帳記錄，點上方「新增」開始記帳</div>';
+    totalEl.style.display = 'none'; return;
+  }
+  const byDay = {};
+  expenses.forEach(e => { if (!byDay[e.day]) byDay[e.day] = []; byDay[e.day].push(e); });
+  let totalVND = 0, html = '';
+  ['D1','D2','D3','D4','D5'].forEach(d => {
+    if (!byDay[d]) return;
+    let dayVND = 0;
+    html += `<div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);padding:8px 0 4px">${d}</div>`;
+    byDay[d].forEach(e => {
+      const vnd = e.cur === 'TWD' ? Math.round(e.amt * rate) : e.amt;
+      const twd = e.cur === 'VND' ? Math.round(e.amt / rate) : e.amt;
+      dayVND += vnd; totalVND += vnd;
+      html += `<div class="ledger-entry">
+        <div class="ledger-thumb">
+          ${e.photo ? `<img src="${e.photo}" style="width:36px;height:36px;border-radius:6px;object-fit:cover">` : '<i class="fa-solid fa-receipt" style="font-size:.8rem"></i>'}
+        </div>
+        <div class="entry-info">
+          <div class="entry-name">${e.name}</div>
+          <div class="entry-date">${e.date || ''}</div>
+        </div>
+        <div class="entry-amounts">
+          <div class="entry-vnd">${e.cur === 'VND' ? '₫' : 'NT$'}${e.amt.toLocaleString()}</div>
+          <div class="entry-twd">${e.cur === 'VND' ? '≈ NT$' + Math.round(e.amt/rate).toLocaleString() : '≈ ₫' + Math.round(e.amt*rate).toLocaleString()}</div>
+        </div>
+        <div class="del-entry" onclick="deleteExpense(${e.id})"><i class="fa-solid fa-xmark"></i></div>
+      </div>`;
+    });
+    html += `<div class="day-total"><span>${d} 小計</span><span>₫${dayVND.toLocaleString()} ≈ NT$${Math.round(dayVND/rate).toLocaleString()}</span></div>`;
+  });
+  list.innerHTML = html;
+  const totalTWD = Math.round(totalVND / rate);
+  totalEl.style.display = 'block';
+  totalEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;padding:.8rem;background:var(--ink);border-radius:10px;color:white">
+    <span style="font-size:11px;color:rgba(200,169,110,.7)">全程總花費</span>
+    <div style="text-align:right">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--gold)">NT$ ${totalTWD.toLocaleString()}</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.4)">₫${totalVND.toLocaleString()}</div>
+    </div>
+  </div>`;
+}
+
+// ===== CHECKLIST =====
+function renderChecklist() {
+  let allItems = [], doneCount = 0;
+  let html = '';
+  CHECKLIST.forEach(g => {
+    html += `<div class="check-group-title">${g.group}</div>`;
+    g.items.forEach(item => {
+      const key = item;
+      const done = checks[key] || false;
+      if (done) doneCount++;
+      allItems.push(item);
+      html += `<div class="check-item" onclick="toggleCheck('${key.replace(/'/g,"\\'")}')">
+        <div class="check-box ${done ? 'done' : ''}"></div>
+        <span class="check-label ${done ? 'done' : ''}">${item}</span>
+      </div>`;
+    });
+  });
+  document.getElementById('checklistItems').innerHTML = html;
+  document.getElementById('checkProgress').textContent = `${doneCount} / ${allItems.length} 完成`;
+}
+
+function toggleCheck(key) {
+  checks[key] = !checks[key];
+  localStorage.setItem('vn_checks', JSON.stringify(checks));
+  renderChecklist();
+}
+
+// ===== MEMO =====
+function saveMemo() {
+  const text = document.getElementById('memo-input').value.trim();
+  if (!text) return;
+  memos.unshift({ id: Date.now(), text });
+  localStorage.setItem('vn_memos', JSON.stringify(memos));
+  document.getElementById('memo-input').value = '';
+  renderMemos();
+}
+
+function deleteMemo(id) {
+  memos = memos.filter(m => m.id !== id);
+  localStorage.setItem('vn_memos', JSON.stringify(memos));
+  renderMemos();
+}
+
+function renderMemos() {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  document.getElementById('memoList').innerHTML = memos.map(m => {
+    const content = m.text.replace(urlRegex, url => `<a href="${url}" target="_blank">${url}</a>`);
+    return `<div class="memo-entry">
+      <span class="memo-del" onclick="deleteMemo(${m.id})"><i class="fa-solid fa-trash-can"></i></span>
+      ${content}
+    </div>`;
+  }).join('') || '<div style="font-size:12px;color:var(--mist);text-align:center;padding:8px 0">尚無備忘，在上方輸入並儲存</div>';
+}
+
+// ===== INIT =====
+renderTimeline();
+renderLedger();
+renderChecklist();
+renderMemos();
+document.getElementById('rateDisplay').textContent = rate.toLocaleString();
+
+// memo enter key
+document.getElementById('memo-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.ctrlKey) saveMemo();
+});
+</script>
+</body>
+</html>
