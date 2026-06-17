@@ -377,6 +377,28 @@
   .info-label { color: #7A6E66; }
   .info-val { font-weight: 500; }
   .info-val a { color: var(--gold); text-decoration: none; }
+  .hotel-row {
+    padding: .65rem 1rem; border-bottom: .5px solid #F5EFE6;
+  }
+  .hotel-row:last-child { border-bottom: none; }
+  .hotel-row-top {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+  }
+  .hotel-day-tag {
+    flex-shrink: 0; font-size: 10px; font-weight: 600; color: var(--gold);
+    background: rgba(200,169,110,.12); padding: 2px 7px; border-radius: 6px;
+    letter-spacing: .04em;
+  }
+  .hotel-name {
+    flex: 1; font-size: 12px; color: var(--ink); line-height: 1.4; margin-left: 8px;
+  }
+  .hotel-name small { display: block; color: #9A8E80; font-size: 10px; margin-top: 1px; }
+  .hotel-tel {
+    display: flex; justify-content: flex-end; margin-top: 4px;
+  }
+  .hotel-tel a {
+    font-size: 11.5px; font-weight: 500; color: var(--gold); text-decoration: none;
+  }
   .warning-item {
     display: flex; align-items: flex-start; gap: 8px;
     padding: .55rem 1rem; border-bottom: .5px solid #F5EFE6; font-size: 11.5px;
@@ -812,20 +834,26 @@
       <span class="info-label">導遊：李美惠</span>
       <span class="info-val"><a href="tel:‭0970116885‬">‭0970-116-885‬</a></span>
     </div>
-    <div class="info-row">
-      <span class="info-label">D1</span>
-      <span class="info-label">下龍灣海雅特飯店 <br/>The Yacht Hotel by DC</span>
-      <span class="info-val"><a href="tel:‭002842033566688‬">‭002‬-‭84‬-‭203‬-‭3566688‬</a></span>
+    <div class="hotel-row">
+      <div class="hotel-row-top">
+        <span class="hotel-day-tag">D1</span>
+        <span class="hotel-name">下龍灣海雅特飯店<small>The Yacht Hotel by DC</small></span>
+      </div>
+      <div class="hotel-tel"><a href="tel:0084203566688">002-84-203-3566688</a></div>
     </div>
-    <div class="info-row">
-      <span class="info-label">D2</span>
-      <span class="info-label">印太之星號 <br/>INDOCHINE GRAND CRUISE</span>
-      <span class="info-val"><a href="tel:002-84-86-2554556">‭002‬-‭84‬-‭86‬-‭2554556‬</a></span>
+    <div class="hotel-row">
+      <div class="hotel-row-top">
+        <span class="hotel-day-tag">D2</span>
+        <span class="hotel-name">印太之星號<small>INDOCHINE GRAND CRUISE</small></span>
+      </div>
+      <div class="hotel-tel"><a href="tel:0084862554556">002-84-86-2554556</a></div>
     </div>
-    <div class="info-row">
-      <span class="info-label">D3、D4</span>
-      <span class="info-label">瑞享酒店 <br/>MOVENPICK HOTEL HANOI CENTRE</span>
-      <span class="info-val"><a href="tel:‭002‬-‭844‬-‭3822‬-‭2800‬">002-844-3822-2800</a></span>
+    <div class="hotel-row">
+      <div class="hotel-row-top">
+        <span class="hotel-day-tag">D3·D4</span>
+        <span class="hotel-name">瑞享酒店<small>MOVENPICK HOTEL HANOI CENTRE</small></span>
+      </div>
+      <div class="hotel-tel"><a href="tel:0084438222800">002-844-3822-2800</a></div>
     </div>
   </div>
 
